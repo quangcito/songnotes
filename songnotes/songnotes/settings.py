@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -99,6 +102,19 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# Authentication Backends
+# https://docs.djangoproject.com/en/dev/ref/settings/?from=olddocs#authentication-backends
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.spotify.SpotifyOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+SOCIAL_AUTH_SPOTIFY_KEY = '8b48dd288bec46eaa1e1c3d06c9ce36d'
+SOCIAL_AUTH_SPOTIFY_SECRET = 'f84aa0c3d8514672a56a6443a574ad94'
+SOCIAL_AUTH_SPOTIFY_SCOPE = ['user-read-email', 'user-library-read']
 
 
 # Internationalization
