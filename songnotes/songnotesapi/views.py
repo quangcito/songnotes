@@ -8,5 +8,5 @@ def index(request):
   return render(request, 'songnotesapi/index.html')
 
 class SongnoteViewSet(viewsets.ModelViewSet):
-    queryset = Songnote.objects.all().order_by('song_name')
-    serializer_class = SongnoteSerializer
+  queryset = Songnote.objects.all().order_by('song_name')
+  serializer_class = SongnoteSerializer
