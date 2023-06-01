@@ -116,6 +116,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# Django REST Framework
+# https://www.django-rest-framework.org
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # OAuth
@@ -123,6 +125,8 @@ REST_FRAMEWORK = {
         'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # django-oauth-toolkit >= 1.0.0
         'drf_social_oauth2.authentication.SocialAuthentication',
     ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
 }
 
 
@@ -141,7 +145,7 @@ AUTHENTICATION_BACKENDS = (
 
 DRFSO2_PROPRIETARY_BACKEND_NAME = 'Spotify'
 
-# DRFSO2_URL_NAMESPACE = 'social'
+DRFSO2_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 # Spotify configuration

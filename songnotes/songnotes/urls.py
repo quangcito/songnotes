@@ -17,9 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path, include
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("songnotesapi/", include("songnotesapi.urls")),
+    path('', include("songnotesapi.urls")),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     re_path(r'^auth/', include('drf_social_oauth2.urls', namespace='drf')),
-    path('social/', include('social_django.urls')),
+    path('social/', include('social_django.urls', namespace='social')),
 ]
