@@ -1,0 +1,22 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Django",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/songnotes/manage.py",
+      "args": [
+        "runserver"
+      ],
+      "django": true,
+      "justMyCode": true,
+      "env": {"SOCIAL_AUTH_SPOTIFY_KEY": "8b48dd288bec46eaa1e1c3d06c9ce36d",
+              "SOCIAL_AUTH_SPOTIFY_SECRET": "f84aa0c3d8514672a56a6443a574ad94",},
+      "cwd": "${workspaceFolder}/songnotes"
+    }
+  ]
+}
