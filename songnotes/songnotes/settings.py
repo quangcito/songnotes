@@ -88,8 +88,8 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "songnotes",
         "USER": "postgres",
-        "PASSWORD": "",
-        "HOST": "localhost",
+        "PASSWORD": "songnotes123",
+        "HOST": "songnotes-sql",
         "PORT": "",
     }
 }
