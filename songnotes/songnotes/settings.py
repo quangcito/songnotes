@@ -39,8 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social_django',
     'rest_framework',
+    # OAuth
+    'oauth2_provider',
+    'social_django',
+    'drf_social_oauth2',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # OAuth
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
             ],
@@ -84,8 +88,8 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "songnotes",
         "USER": "postgres",
-        "PASSWORD": "",
-        "HOST": "localhost",
+        "PASSWORD": "songnotes123",
+        "HOST": "songnotes-sql",
         "PORT": "",
     }
 }
@@ -111,18 +115,47 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+# Django REST Framework
+# https://www.django-rest-framework.org
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # DRF Basic Auth
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        # OAuth
+        # 'oauth2_provider.ext.rest_framework.OAuth2Authentication',  # django-oauth-toolkit < 1.0.0
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # django-oauth-toolkit >= 1.0.0
+        'drf_social_oauth2.authentication.SocialAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
+
+
 # Authentication Backends
 # https://docs.djangoproject.com/en/dev/ref/settings/?from=olddocs#authentication-backends
 AUTHENTICATION_BACKENDS = (
+    # drf_social_oauth2
+    'drf_social_oauth2.backends.DjangoOAuth2',
+
+    # Spotify OAuth2
     'social_core.backends.spotify.SpotifyOAuth2',
+
+    # Django
     'django.contrib.auth.backends.ModelBackend',
 )
 
+DRFSO2_PROPRIETARY_BACKEND_NAME = 'Spotify'
+
+DRFSO2_URL_NAMESPACE = 'drf'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
+# Spotify configuration
 SOCIAL_AUTH_SPOTIFY_KEY = os.environ['SOCIAL_AUTH_SPOTIFY_KEY']
 SOCIAL_AUTH_SPOTIFY_SECRET = os.environ['SOCIAL_AUTH_SPOTIFY_SECRET']
 
+# Define SOCIAL_AUTH_SPOTIFY_SCOPE to get extra permissions from Facebook.
 SOCIAL_AUTH_SPOTIFY_SCOPE = ['user-read-email', 'user-library-read']
 
 

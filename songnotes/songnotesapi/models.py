@@ -4,11 +4,13 @@ from django.contrib import admin
 from django.db import models
 from django.utils import timezone
 
-# Create your models here.
+
 class Songnote(models.Model):
   song_name = models.CharField(max_length=200)
   song_note = models.CharField(max_length=300)
   pub_date = models.DateTimeField("date published")
+  owner = models.ForeignKey('auth.User', related_name='songnotes', on_delete=models.CASCADE)
+
 
   def __str__(self) -> str:
     return self.song_name
