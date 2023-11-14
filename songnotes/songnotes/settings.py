@@ -90,7 +90,7 @@ DATABASES = {
         "USER": "postgres",
         "PASSWORD": "songnotes123",
         "HOST": "songnotes-sql",
-        "PORT": "5432",
+        "PORT": "",
     }
 }
 
